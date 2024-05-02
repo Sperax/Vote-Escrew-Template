@@ -46,10 +46,9 @@ repos:
         verbose: true
         files: ^(contracts/|interfaces/|libraries/)
 
-    # Static code analyzer for solidity (Currently fails to resolve the dependency properly)
-    # -   id: slither
-    #     name: Slither analysis for smart contracts
-    #     entry: slither . --ignore-compile --exclude-dependencies --exclude-informational --filter-paths
-    #     language: system
-    #     files: ^(contracts/)
-
+    # Static code analyzer for solidity.
+     - id: slither
+       name: Slither analysis for smart contracts
+       entry: bash -c 'for file in "$@"; do slither --filter-paths="(node_modules)" "$file"; done'
+       language: system
+       files: ^(contracts/)
